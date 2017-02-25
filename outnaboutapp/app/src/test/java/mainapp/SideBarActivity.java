@@ -3,6 +3,7 @@ package mainapp;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -60,6 +61,13 @@ public class SideBarActivity extends Activity{
         // Highlight the selected item, update the title, and close the drawer
         myDrawerList.setItemChecked(position, true);
         myDrawerLayout.closeDrawer(myDrawerList);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        //myDrawerToggle.onConfigurationChanged(newConfig);
     }
 
 }
