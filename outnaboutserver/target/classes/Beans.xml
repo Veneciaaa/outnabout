@@ -6,7 +6,7 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="outnabout-cluster-1.cluster-cpvrzhbwmasj.us-west-2.rds.amazonaws.com:3306"/>
+        <property name="url" value="jdbc:mysql://outnabout-cluster-1.cluster-cpvrzhbwmasj.us-west-2.rds.amazonaws.com"/>
         <property name="username" value="outnabout_admin"/>
         <property name="password" value="outnabout1"/>
     </bean>

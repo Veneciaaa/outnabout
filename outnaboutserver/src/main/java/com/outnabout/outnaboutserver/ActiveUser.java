@@ -49,6 +49,24 @@ public class ActiveUser {
 
     private int drinkCount;
 
+    public int getShotCount() {
+        return shotCount;
+    }
+
+    public void addDrinkCount(){
+        drinkCount++;
+    }
+
+    public void addShotCount(){
+        shotCount++;
+    }
+
+    public void setShotCount(int shotCount) {
+        this.shotCount = shotCount;
+    }
+
+    private int shotCount;
+
     public String getFirstname() {
         return firstname;
     }
@@ -81,13 +99,15 @@ public class ActiveUser {
     private double longitude;
 
     public static HashMap<Integer, ActiveUser> allUsers;
+    public static int currentUserID = 0;
 
     public ActiveUser(int _userID, String _username, String _firstname, String _lastname, double _latitude, double _longitude){
         drinks = new ArrayList<Drink>();
         username = _username;
         lastname = _lastname;
         firstname = _firstname;
-        userID = _userID;
+        userID = currentUserID;
+        currentUserID++;
         latitude = _latitude;
         longitude = _longitude;
         if(allUsers == null) allUsers = new HashMap<Integer, ActiveUser>();

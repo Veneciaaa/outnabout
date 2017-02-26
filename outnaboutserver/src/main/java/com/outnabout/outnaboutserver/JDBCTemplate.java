@@ -6,12 +6,15 @@ import javax.sql.DataSource;
  * Created by francisco on 2/25/17.
  */
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.StringJoiner;
 import javax.sql.DataSource;
 
 import com.outnabout.outnaboutserver.ActiveUser;
 import com.outnabout.outnaboutserver.DAO;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -23,7 +26,12 @@ public class JDBCTemplate  implements DAO{
 
     public void setDataSource(DataSource ds){
         datasource = ds;
-        jdbctemplate = new JdbcTemplate();
+        try {
+            datasource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        jdbctemplate = new JdbcTemplate(datasource);
     }
 
     public JDBCTemplate(DataSource ds){
@@ -38,6 +46,7 @@ public class JDBCTemplate  implements DAO{
         query += "'" + user.getLastname() + "'";
         query += "'" + user.getUsername() + "'";
 
+        jdbctemplate.setDataSource(datasource);
         jdbctemplate.update(query);
     }
 
