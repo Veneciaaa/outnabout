@@ -15,6 +15,6 @@ public class GreetingController {
 
     @RequestMapping("/initiateactiveuser")
     public ActiveUser greeting() {
-        return new ActiveUser(0, "default", 0.0, 0.0);
+        return new ActiveUser(0, "default", "default", "default", 0.0, 0.0);
     }
 }

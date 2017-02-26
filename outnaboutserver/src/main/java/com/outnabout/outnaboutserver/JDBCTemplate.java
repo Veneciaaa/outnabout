@@ -16,7 +16,7 @@ import org.springframework.jdbc.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
-public class JDBCTemplate  {
+public class JDBCTemplate  implements DAO{
 
     private DataSource datasource;
     private JdbcTemplate jdbctemplate;
@@ -26,16 +26,20 @@ public class JDBCTemplate  {
         jdbctemplate = new JdbcTemplate();
     }
 
-//    @Override
-//    public void createUser(ActiveUser user){
-//        String query = "insert into app.User (User_Id, First_Name, Last_Name, Username) values (";
-//        query += user.getUserID();
-//        query += user.getFirstName();
-//        query += user.getLastName();
-//        query += user.getUsername();
-//
-//        jdbctemplate.update(query);
-//    }
+    public JDBCTemplate(DataSource ds){
+        setDataSource(ds);
+    }
+
+    @Override
+    public void createUser(ActiveUser user){
+        String query = "insert into app.User (User_Id, First_Name, Last_Name, Username) values (";
+        query += user.getUserID();
+        query += "'" + user.getFirstname() + "'";
+        query += "'" + user.getLastname() + "'";
+        query += "'" + user.getUsername() + "'";
+
+        jdbctemplate.update(query);
+    }
 
     //@Override
     public ActiveUser getUserByID(int id){

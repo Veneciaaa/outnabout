@@ -2,8 +2,11 @@ package com.outnabout.outnaboutserver;
 
 //import com.outnabout.outnaboutserver.OutnaboutserverApplication;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 
 /**
@@ -19,7 +22,17 @@ public class ActiveUserController {
         //Get User Information from database using userID
 
         //OutnaboutserverApplication.activeUsers.add(new ActiveUser(0, "default", 0.0, 0.0));
-        return new ActiveUser(Integer.parseInt(userID), "default", 0.0, 0.0);
+        return new ActiveUser(Integer.parseInt(userID), "default", "default","default", 0.0, 0.0);
+    }
+
+    @RequestMapping("/addNewUser")
+    public String addNewUser(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        DataSource ds = (DataSource) context.getBean("dataSource");
+        JDBCTemplate jdbc = new JDBCTemplate(ds);
+
+        jdbc.createUser(new ActiveUser(100,  "default", "default","default", 0.0, 0.0));
+        return "success";
     }
 
     @RequestMapping("/allActiveUsers")
